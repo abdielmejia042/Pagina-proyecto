@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fundación Lumen — Inclusión y Tecnología</title>
+  <meta name="description" content="Fundación Lumen: software educativo para personas sordas y ciegas. Proyecto desarrollado por estudiantes del Instituto Tecnológico de Ensenada."/>
+  <style>
+    :root{
+      --bg:#0f1724;        /* dark navy */
+      --card:#0b1220;
+      --accent:#7dd3fc;    /* light blue */
+      --accent-2:#60a5fa;  /* blue */
+      --muted:#94a3b8;
+      --glass: rgba(255,255,255,0.04);
+      --radius:14px;
+      --maxw:1100px;
+      --ff-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--ff-sans);
+      background: linear-gradient(180deg,#071127 0%, #081426 50%, #041022 100%);
+      color:#e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+      padding:24px;
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+    }
+    .container{
+      width:100%;
+      max-width:var(--maxw);
+    }
+
+    /* header */
+    header{
+      display:flex;
+      gap:16px;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:20px;
+    }
+    .brand{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      text-decoration:none;
+      color:inherit;
+    }
+    .logo{
+      width:68px;height:68px;
+      border-radius:12px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      color:#04263a;
+      box-shadow:0 6px 18px rgba(0,0,0,0.5);
+      flex-shrink:0;
+    }
+    .brand h1{font-size:18px;margin:0}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
+
+    nav a{
+      color:var(--muted);
+      text-decoration:none;
+      margin-left:16px;
+      font-size:14px;
+    }
+    nav a:hover{color:var(--accent)}
+
+    /* hero */
+    .hero{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      border-radius:var(--radius);
+      padding:28px;
+      display:grid;
+      grid-template-columns: 1fr 380px;
+      gap:24px;
+      align-items:center;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+      margin-bottom:20px;
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    .hero h2{margin:0 0 8px 0;font-size:28px}
+    .hero p.lead{color:var(--muted);margin:0 0 18px 0}
+    .cta{
+      display:flex;gap:12px;
+    }
+    .btn{
+      background:var(--accent);
+      color:#052233;
+      padding:10px 16px;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:600;
+      box-shadow:0 6px 14px rgba(45,120,170,0.12);
+    }
+    .btn.secondary{
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.06);
+      color:var(--muted);
+    }
+
+    /* grid sections */
+    .grid{
+      display:grid;
+      gap:18px;
+      grid-template-columns: repeat(3,1fr);
+      margin-bottom:18px;
+    }
+    .card{
+      background:linear-gradient(180deg,var(--card), rgba(10,16,28,0.6));
+      padding:18px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.03);
+      min-height:120px;
+    }
+    .card h3{margin-top:0;margin-bottom:8px;color:var(--accent)}
+    .muted{color:var(--muted);font-size:14px}
+
+    /* wide sections */
+    section.wide{
+      background:var(--glass);
+      border-radius:12px;
+      padding:18px;
+      margin-bottom:18px;
+      border:1px solid rgba(255,255,255,0.03);
+    }
+
+    /* team list */
+    .team{
+      display:flex;gap:12px;flex-wrap:wrap;
+    }
+    .person{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      padding:12px;border-radius:10px;
+      min-width:180px;flex:1;
+      display:flex;gap:12px;align-items:center;
+      border:1px solid rgba(255,255,255,0.02);
+    }
+    .avatar{
+      width:56px;height:56px;border-radius:10px;
+      background:linear-gradient(135deg,#a78bfa,#7dd3fc);
+      display:flex;align-items:center;justify-content:center;
+      font-weight:700;color:#052233;
+    }
+
+    /* FODA accordion */
+    .accordion{display:grid;gap:10px}
+    .acc-item{
+      border-radius:10px;background:transparent;
+      overflow:hidden;border:1px solid rgba(255,255,255,0.04);
+    }
+    .acc-head{
+      display:flex;justify-content:space-between;align-items:center;padding:12px 14px;cursor:pointer;
+      background:linear-gradient(90deg, rgba(255,255,255,0.01), transparent);
+    }
+    .acc-head h4{margin:0;font-size:15px;color:var(--accent)}
+    .acc-body{padding:12px 14px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);display:none;color:var(--muted);}
+
+    .footer{
+      display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-radius:10px;
+      background:transparent;color:var(--muted);font-size:14px;border:1px solid rgba(255,255,255,0.03);
+    }
+
+    /* responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:640px){
+      body{padding:14px}
+      .grid{grid-template-columns:1fr}
+      nav{display:none}
+      .brand p{display:none}
+    }
+
+    /* small utilities */
+    ul.clean{padding-left:18px;margin:0}
+    .chip{display:inline-block;background:rgba(255,255,255,0.02);padding:6px 10px;border-radius:999px;font-size:13px;color:var(--muted)}
+    .kpi{font-size:20px;font-weight:700;color:var(--accent)}
+    .small{font-size:13px;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <div class="container" role="main">
+    <header>
+      <a class="brand" href="#home" aria-label="Fundación Lumen">
+        <div class="logo" aria-hidden="true">FL</div>
+        <div>
+          <h1>Fundación Lumen</h1>
+          <p>Inclusión · Educación · Tecnología</p>
+        </div>
+      </a>
+
+      <nav aria-label="Navegación principal">
+        <a href="#about">Proyecto</a>
+        <a href="#team">Equipo</a>
+        <a href="#operations">Operaciones</a>
+        <a href="#foda">FODA</a>
+        <a href="#contact">Contacto</a>
+      </nav>
+    </header>
+
+    <section id="home" class="hero" aria-labelledby="h-home">
+      <div>
+        <h2 id="h-home">Fundación Lumen — Software educativo accesible</h2>
+        <p class="lead">Desarrollamos herramientas digitales que facilitan el aprendizaje y la comunicación de personas sordas y ciegas. Proyecto académico del Instituto Tecnológico de Ensenada.</p>
+        <div class="cta" role="group" aria-label="Acciones">
+          <a class="btn" href="#about">Ver proyecto</a>
+          <a class="btn secondary" href="#contact">Contactar</a>
+        </div>
+
+        <div style="margin-top:18px;display:flex;gap:12px;flex-wrap:wrap;">
+          <div class="chip">Educación inclusiva</div>
+          <div class="chip">Lengua de Señas</div>
+          <div class="chip">Braille digital</div>
+        </div>
+      </div>
+
+      <aside aria-label="Resumen del proyecto" style="padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);">
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div>
+            <div class="small">Duración estimada</div>
+            <div class="kpi">1 semestre</div>
+          </div>
+          <div>
+            <div class="small">Público objetivo</div>
+            <div class="muted">Personas sordas y ciegas, instituciones educativas</div>
+          </div>
+          <div>
+            <div class="small">Tipo</div>
+            <div class="muted">Software educativo (A.C.)</div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- quick cards -->
+    <div class="grid" aria-hidden="false">
+      <article class="card" aria-labelledby="obj">
+        <h3 id="obj">Objetivo general</h3>
+        <p class="muted">Desarrollar un software educativo inclusivo que facilite el aprendizaje y la comunicación de personas sordas y ciegas, promoviendo igualdad de oportunidades.</p>
+      </article>
+
+      <article class="card" aria-labelledby="mision">
+        <h3 id="mision">Misión</h3>
+        <p class="muted">Brindar apoyo educativo a personas sordas y ciegas mediante herramientas tecnológicas accesibles desarrolladas por estudiantes.</p>
+      </article>
+
+      <article class="card" aria-labelledby="vision">
+        <h3 id="vision">Visión</h3>
+        <p class="muted">Ser una fundación reconocida por soluciones tecnológicas que eliminen barreras de comunicación y promuevan inclusión educativa.</p>
+      </article>
+    </div>
+
+    <!-- about / project -->
+    <section id="about" class="wide" aria-labelledby="about-h">
+      <h2 id="about-h" style="margin-top:0;color:var(--accent)">Proyecto — Datos generales</h2>
+      <p class="muted">Nombre: Fundación Lumen · Área: Educación y tecnología inclusiva · Institución: Instituto Tecnológico de Ensenada.</p>
+
+      <div style="display:grid;grid-template-columns:1fr 320px;gap:18px;margin-top:14px;">
+        <div>
+          <h3 style="color:var(--accent)">Justificación</h3>
+          <p class="muted">El proyecto busca promover la inclusión social y educativa mediante herramientas tecnológicas accesibles, contribuyendo al aprendizaje y comunicación de personas con discapacidad sensorial.</p>
+
+          <h3 style="color:var(--accent);margin-top:12px">Objetivos específicos</h3>
+          <ul class="clean muted">
+            <li>Investigar necesidades educativas de la comunidad con discapacidad sensorial.</li>
+            <li>Diseñar una interfaz accesible y funcional.</li>
+            <li>Implementar recursos: texto, audio, lengua de señas digital, braille digital.</li>
+            <li>Fomentar la conciencia social sobre inclusión.</li>
+          </ul>
+        </div>
+
+        <div style="background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent);padding:12px;border-radius:12px;">
+          <h4 style="margin:0 0 8px 0;color:var(--accent)">Valores institucionales</h4>
+          <ul class="clean muted">
+            <li>Inclusión</li>
+            <li>Solidaridad</li>
+            <li>Innovación</li>
+            <li>Responsabilidad social</li>
+            <li>Respeto</li>
+            <li>Trabajo en equipo</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- team -->
+    <section id="team" class="wide" aria-labelledby="team-h">
+      <h2 id="team-h" style="color:var(--accent)">Equipo</h2>
+      <p class="muted">Equipo de estudiantes responsables y roles principales.</p>
+
+      <div class="team" style="margin-top:12px">
+        <div class="person" role="article" aria-label="Ever Abdiel Aquino Mejia — Director General">
+          <div class="avatar">EA</div>
+          <div>
+            <strong>Ever A. A. Mejía</strong>
+            <div class="small">Director General — Liderazgo y coordinación</div>
+          </div>
+        </div>
+
+        <div class="person" role="article" aria-label="Ramón Antonio Villavicencio — Desarrollo">
+          <div class="avatar">RV</div>
+          <div>
+            <strong>Ramón A. V.</strong>
+            <div class="small">Programación y pruebas</div>
+          </div>
+        </div>
+
+        <div class="person" role="article" aria-label="Luis Ángel Herrera — Diseño">
+          <div class="avatar">LH</div>
+          <div>
+            <strong>Luis A. H.</strong>
+            <div class="small">UX/UI y accesibilidad</div>
+          </div>
+        </div>
+
+        <div class="person" role="article" aria-label="Emmanuel García — Soporte técnico">
+          <div class="avatar">EG</div>
+          <div>
+            <strong>Emmanuel G.</strong>
+            <div class="small">Equipo técnico</div>
+          </div>
+        </div>
+
+        <div class="person" role="article" aria-label="Rafael Yañez — Mercadotecnia">
+          <div class="avatar">RY</div>
+          <div>
+            <strong>Rafael Y.</strong>
+            <div class="small">Mercadotecnia y difusión</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- operations -->
+    <section id="operations" class="wide" aria-labelledby="ops-h">
+      <h2 id="ops-h" style="color:var(--accent)">Operaciones</h2>
+      <p class="muted">Descripción general del flujo de trabajo, equipo y recursos.</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+        <div style="background:transparent;padding:10px;border-radius:10px;">
+          <h4 style="color:var(--accent)">Flujograma (resumen)</h4>
+          <ol class="muted">
+            <li>Investigación y recolección de necesidades.</li>
+            <li>Definición de requerimientos.</li>
+            <li>Diseño de interfaces accesibles.</li>
+            <li>Desarrollo de módulos (audio, señas, braille).</li>
+            <li>Pruebas y retroalimentación.</li>
+            <li>Implementación y difusión.</li>
+          </ol>
+        </div>
+
+        <div style="background:transparent;padding:10px;border-radius:10px;">
+          <h4 style="color:var(--accent)">Equipo y herramientas</h4>
+          <ul class="clean muted">
+            <li>Computadoras y dispositivos móviles (pruebas).</li>
+            <li>Software de desarrollo y diseño (IDE, frameworks web).</li>
+            <li>Equipo audiovisual para captura de lenguaje de señas.</li>
+            <li>Recopilación de recursos educativos y LSM.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- marketing -->
+    <section id="marketing" class="wide" aria-labelledby="mkt-h">
+      <h2 id="mkt-h" style="color:var(--accent)">Mercadotecnia</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+        <div>
+          <h4 style="color:var(--accent)">Segmento de mercado</h4>
+          <p class="muted">Personas sordas/ciegas, instituciones educativas, docentes especializados, familias y organizaciones civiles.</p>
+
+          <h4 style="color:var(--accent);margin-top:8px">Empaque y entrega</h4>
+          <p class="muted">Interfaz digital intuitiva, manual de uso accesible, demostraciones y pruebas con usuarios.</p>
+        </div>
+
+        <div>
+          <h4 style="color:var(--accent)">Estrategias</h4>
+          <ul class="clean muted">
+            <li>Marketing social en redes y portales educativos.</li>
+            <li>Alianzas con escuelas y organizaciones de inclusión.</li>
+            <li>Demostraciones en eventos y ferias educativas.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FODA accordion -->
+    <section id="foda" class="wide" aria-labelledby="foda-h">
+      <h2 id="foda-h" style="color:var(--accent)">Análisis FODA</h2>
+      <div class="accordion" style="margin-top:12px">
+        <div class="acc-item">
+          <div class="acc-head" data-target="f1" role="button" tabindex="0" aria-expanded="false">
+            <h4>Fortalezas</h4>
+            <div class="small">Haz clic para ver</div>
+          </div>
+          <div id="f1" class="acc-body">
+            <ul class="clean muted">
+              <li>Proyecto con impacto social e inclusivo.</li>
+              <li>Equipo con habilidades tecnológicas y creativas.</li>
+              <li>Uso de tecnologías accesibles y pedagógicas.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <div class="acc-head" data-target="o1" role="button" tabindex="0" aria-expanded="false">
+            <h4>Oportunidades</h4>
+            <div class="small">Haz clic para ver</div>
+          </div>
+          <div id="o1" class="acc-body">
+            <ul class="clean muted">
+              <li>Interés institucional en herramientas inclusivas.</li>
+              <li>Posibles apoyos y financiamientos externos.</li>
+              <li>Mayor demanda por soluciones accesibles en educación.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <div class="acc-head" data-target="d1" role="button" tabindex="0" aria-expanded="false">
+            <h4>Debilidades</h4>
+            <div class="small">Haz clic para ver</div>
+          </div>
+          <div id="d1" class="acc-body">
+            <ul class="clean muted">
+              <li>Recursos limitados de tiempo y financiamiento.</li>
+              <li>Necesidad de experiencia profesional adicional.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <div class="acc-head" data-target="a1" role="button" tabindex="0" aria-expanded="false">
+            <h4>Amenazas</h4>
+            <div class="small">Haz clic para ver</div>
+          </div>
+          <div id="a1" class="acc-body">
+            <ul class="clean muted">
+              <li>Competencia de soluciones profesionales.</li>
+              <li>Cambios tecnológicos y poca participación inicial.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- conclusion -->
+    <section class="wide" aria-labelledby="concl">
+      <h2 id="concl" style="color:var(--accent)">Conclusión</h2>
+      <p class="muted">La Fundación Lumen es una iniciativa con gran potencial de impacto social que combina conocimientos técnicos y compromiso humano para desarrollar herramientas que favorezcan la inclusión educativa. Con una estrategia clara de desarrollo, pruebas con usuarios y alianzas estratégicas, el proyecto puede escalar y beneficiar a muchas personas con discapacidad sensorial.</p>
+    </section>
+
+    <!-- footer / contact -->
+    <footer id="contact" class="footer" aria-labelledby="contact-h">
+      <div>
+        <h3 id="contact-h" style="margin:0;color:var(--accent)">Contacto</h3>
+        <div class="small" style="margin-top:6px">Equipo: Ever Mejía y equipo — Instituto Tecnológico de Ensenada</div>
+      </div>
+
+      <div style="text-align:right">
+        <div class="small">Entrega: plataforma institucional</div>
+        <div style="margin-top:6px"><a class="btn" href="mailto:ever@example.com" style="text-decoration:none;">Enviar email</a></div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Accordion behavior
+    document.querySelectorAll('.acc-head').forEach(head=>{
+      function toggle(){
+        const id = head.getAttribute('data-target');
+        const body = document.getElementById(id);
+        const expanded = head.getAttribute('aria-expanded') === 'true';
+        head.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        if(expanded){
+          body.style.display='none';
+        }else{
+          body.style.display='block';
+        }
+      }
+      head.addEventListener('click', toggle);
+      head.addEventListener('keydown', (e)=>{
+        if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+      });
+    });
+  </script>
+</body>
+</html>
